@@ -1,18 +1,61 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useContext, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
+import WindowSimulatorScreen from './screens/WindowSimulatorScreen';
 import StartScreen from './screens/StartScreen';
+import SearchingPlantScreen from './screens/SearchingPlantScreen';
+import SettingsScreen from './screens/SettingsScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import WallSimulatorScreen from "./screens/WallSimulatorScreen";
+import FloorSimulatorScreen from "./screens/FloorSimulatorScreen";
 import { Colors } from './constants/styles';
 import AuthContextProvider, { AuthContext } from './store/auth-content';
-import { useContext, useEffect, useState } from 'react';
 import IconButton from './components/ui/IconButton';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {SvgFloor, SvgWall, SvgWindow} from "./components/ui/Svg";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+const Bottom = createBottomTabNavigator();
+
+function BottomNav() {
+    return (
+        <Bottom.Navigator>
+            <Bottom.Screen
+                name='Parapet'
+                component={WindowSimulatorScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({color,size}) =>(
+                        <SvgWindow color={color} size={size}/> )
+                }}
+            />
+            <Bottom.Screen
+                name='Ściana'
+                component={WallSimulatorScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({color,size}) =>(
+                        <SvgWall color={color} size={size} /> )
+                }}/>
+            <Bottom.Screen
+                name='Podłoga'
+                component={FloorSimulatorScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({color,size}) =>(
+                        <SvgFloor color={color} size={size}/>)
+                }}
+            />
+        </Bottom.Navigator>
+    );
+}
 
 function AuthStack() {
   return (
@@ -33,28 +76,41 @@ function AuthStack() {
 function AuthenticatedStack() {
   const authCtx = useContext(AuthContext);
   return (
-    <Stack.Navigator
+    <Drawer.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: Colors.primary500 },
         headerTintColor: 'white',
-        contentStyle: { backgroundColor: Colors.primary100 },
+        drawerContentStyle: { backgroundColor: Colors.primary100 },
+        drawerInactiveTintColor: Colors.primary500,
+        drawerActiveBackgroundColor: Colors.primary500,
+        drawerActiveTintColor: 'white',
+          headerRight: ({ tintColor }) => (
+          <IconButton
+          icon="exit"
+          color={tintColor}
+          size={24}
+          onPress={authCtx.logout}
+          />
+          ),
       }}
     >
-      <Stack.Screen
-        name="Welcome"
-        component={WelcomeScreen}
-        options={{
-          headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="exit"
-              color={tintColor}
-              size={24}
-              onPress={authCtx.logout}
-            />
-          ),
-        }}
+      <Drawer.Screen
+        name="Symulacja"
+        component={BottomNav}
       />
-    </Stack.Navigator>
+      <Drawer.Screen
+      name="Wyszukiwarka roślin"
+      component={SearchingPlantScreen}
+      />
+      <Drawer.Screen 
+      name='Profil'
+      component={ProfileScreen}
+      />
+      <Drawer.Screen 
+      name='Ustawienia'
+      component={SettingsScreen}
+      />
+    </Drawer.Navigator>
   );
 }
 
