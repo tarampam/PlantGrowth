@@ -13,6 +13,8 @@ import SettingsScreen from './screens/SettingsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import WallSimulatorScreen from "./screens/WallSimulatorScreen";
 import FloorSimulatorScreen from "./screens/FloorSimulatorScreen";
+import PlantSelectionScreen from "./screens/PlantingScreens/PlantSelectionScreen";
+import ChoiceOfGround from "./screens/PlantingScreens/ChoiceOfGround";
 import { Colors } from './constants/styles';
 import AuthContextProvider, { AuthContext } from './store/auth-content';
 import IconButton from './components/ui/IconButton';
@@ -23,6 +25,17 @@ import {SvgFloor, SvgWall, SvgWindow} from "./components/ui/Svg";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Bottom = createBottomTabNavigator();
+const PlantingStack = createNativeStackNavigator();
+
+function PlantingNav() {
+    return (
+        <PlantingStack.Navigator>
+            <PlantingStack.Screen name='Simulator' component={BottomNav} options={{headerShown: false}}/>
+            <PlantingStack.Screen name='Wybór rośliny' component={PlantSelectionScreen} />
+            <PlantingStack.Screen name='Wybór ziemi' component={ChoiceOfGround} />
+        </PlantingStack.Navigator>
+    )
+}
 
 function BottomNav() {
     return (
@@ -96,7 +109,7 @@ function AuthenticatedStack() {
     >
       <Drawer.Screen
         name="Symulacja"
-        component={BottomNav}
+        component={PlantingNav}
       />
       <Drawer.Screen
       name="Wyszukiwarka roślin"

@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import FeedButtons from "../components/ui/FeedButtons";
 
+import {useNavigation} from '@react-navigation/native';
+
 function WindowSimulatorScreen() {
     //TODO waiting for backend
     // const [fetchedMessage, setFetchedMessage] = useState('');
@@ -20,15 +22,28 @@ function WindowSimulatorScreen() {
     //         setFetchedMessage(response.data);
     //     });
     // }, []);
+  const navigation = useNavigation();
+  const [isClicked, setClicked] = useState(false)
+
+  function SquareComponent(){
+    return (
+        <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={0.4}  />
+    )
+  }
+  function PlantComponent() {
+    return (
+        <Image source={images.animatedPlant} style={{width: 100, height: 100, bottom: 20 }}/>
+    )
+  }
   return (
     <View style={styles.rootContainer}>
         <ImageBackground source={images.wallBg} style={styles.imageBg} resizeMode="cover">
             <Image source={images.windowsill} style={styles.image}/>
-          <TouchableOpacity style={[styles.square, {left: 60}]}>
+          <TouchableOpacity style={[styles.square, {left: 60}]} onPress={() => navigation.navigate('Wybór rośliny')}>
             <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={1}  />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.square, {left: 160}]}>
-            <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={0.4}  />
+          <TouchableOpacity style={[styles.square, {left: 160}]} onPress={() => setClicked(!isClicked)}>
+            {isClicked ?  <SquareComponent /> : <PlantComponent />}
           </TouchableOpacity>
           <TouchableOpacity style={[styles.square, {left: 260}]}>
             <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={0.4}  />
