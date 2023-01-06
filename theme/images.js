@@ -5,6 +5,7 @@ import wallBg from '../assets/images/white-blank-concrete-wall-with-a-wooden-flo
 import shelf from '../assets/images/shelf.png'
 import floorBg from '../assets/images/white-blank-concrete-wall-with-a-wooden-floor2.jpg'
 import fertilizer from '../assets/images/seeds-fertilizer-svgrepo-com (3).svg'
+import animatedPlant from '../assets/images/animated-plant-image.gif'
 
 export const images = {
   logo: Logo,
@@ -14,4 +15,5 @@ export const images = {
   floorBg: floorBg,
   shelf: shelf,
   fertilizer: fertilizer,
+  animatedPlant: animatedPlant,
 }
