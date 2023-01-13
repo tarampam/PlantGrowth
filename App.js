@@ -21,6 +21,8 @@ import IconButton from './components/ui/IconButton';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {SvgFloor, SvgWall, SvgWindow} from "./components/ui/Svg";
+import {Provider} from "react-redux";
+import {store} from "./store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -161,7 +163,9 @@ export default function App() {
     <>
     <StatusBar style="light" />
     <AuthContextProvider>
+        <Provider store={store}>
       <Root/>
+        </Provider>
     </AuthContextProvider>
     </>
   );
