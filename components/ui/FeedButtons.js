@@ -1,4 +1,4 @@
-import {TouchableOpacity, StyleSheet, Image} from "react-native";
+import {TouchableOpacity, StyleSheet, View} from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faBugSlash, faCircle, faDroplet} from "@fortawesome/free-solid-svg-icons";
 import {SvgFertilizer, SvgPlantOnHand} from "./Svg";
@@ -7,22 +7,120 @@ import {SvgFertilizer, SvgPlantOnHand} from "./Svg";
 import Modal from 'react-native-modal';
 import ActionSheet from "../../components/ui/ActionSheet";
 import React, {useState} from "react";
-import SafeAreaView from "react-native-safe-area-view";
-import {images} from "../../theme/images";
+import {useDispatch} from "react-redux";
+import {changeWatering,changeSprayingWater,changeFertilizer,changeSprayingInsect} from '../../store/redux/plants'
 
-function FeedButtons(){
+function FeedButtons(props){
     const [actionSheet, setActionSheet] = useState(false);
     const [onPressId, setOnPressId] = useState(0);
     const closeActionSheet = () => setActionSheet(false);
+    const dispatch = useDispatch();
+
+    function displayHandler(){
+        if(props.isDisplay){
+            return 'flex'
+        }else {
+            return 'none'
+        }
+
+    }
 
     function listOnPress(value){
         closeActionSheet();
+        props.setFeeds(props.plantId, !props.isDisplay);
         console.log("podlewanie")
-        return(
-            <Image
-                style={{width:100, height:100, bottom: 200, left:310, position:'absolute', zIndex:10}}
-                source={images.logo}/>
-        )
+        switch(value.id){
+            case 1:
+                dispatch(changeWatering(
+                    {
+                        scene: props.plantId,
+                        wateringLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeWatering({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 2:
+                dispatch(changeSprayingWater(
+                    {
+                        scene: props.plantId,
+                        wateringLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeSprayingWater({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 3:
+                dispatch(changeFertilizer(
+                    {
+                        scene: props.plantId,
+                        fertilizerLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeFertilizer({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 4:
+                dispatch(changeFertilizer(
+                    {
+                        scene: props.plantId,
+                        fertilizerLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeFertilizer({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 5:
+                dispatch(changeFertilizer(
+                    {
+                        scene: props.plantId,
+                        fertilizerLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeFertilizer({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 6:
+                dispatch(changeFertilizer(
+                    {
+                        scene: props.plantId,
+                        fertilizerLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeFertilizer({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 7:
+                dispatch(changeSprayingInsect(
+                    {
+                        scene: props.plantId,
+                        diseaseLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeSprayingInsect({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 8:
+                dispatch(changeSprayingInsect(
+                    {
+                        scene: props.plantId,
+                        diseaseLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeSprayingInsect({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 9:
+                dispatch(changeSprayingInsect(
+                    {
+                        scene: props.plantId,
+                        diseaseLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeSprayingInsect({scene: props.plantId}))
+                }, 2000)
+                break;
+        }
     }
     const wateringList = [
         {
@@ -37,34 +135,34 @@ function FeedButtons(){
 
     const fertilizerList = [
         {
-            id: 1,
+            id: 3,
             label: 'Nawóz mineralny do roślin domowych o ozdobnych liściach',
         },
         {
-            id: 2,
+            id: 4,
             label: 'Nawóz Biohumus do roślin zielonych',
         },
         {
-            id: 3,
+            id: 5,
             label: 'Nawóz do kaktusów i sukulentów',
         },
         {
-            id: 4,
+            id: 6,
             label: 'Nawóz do roślin kwitnących',
         }
     ]
 
     const insectList = [
         {
-            id: 1,
+            id: 7,
             label: 'Spray na szarą pleśń',
         },
         {
-            id: 2,
+            id: 8,
             label: 'Spray grzybobójczy',
         },
         {
-            id: 3,
+            id: 9,
             label: 'Spray na choroby i szkodniki',
         },
     ]
@@ -76,7 +174,7 @@ function FeedButtons(){
     ]))
 
     return (
-    <SafeAreaView style={styles.container}>
+    <View style={[styles.container,{display: displayHandler()}]}>
         <TouchableOpacity style={[styles.circle, {left: 280, bottom: 10}]} onPress={()=> {
             setOnPressId(1)
             setActionSheet(true)}}
@@ -118,7 +216,7 @@ function FeedButtons(){
                 onPress={listOnPress}
             />
         </Modal>
-    </SafeAreaView>
+    </View>
     );
 }
 

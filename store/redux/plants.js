@@ -14,6 +14,9 @@ const createdPlants = createSlice({
                 currentState: '',
                 isActive: false,
                 isWatering: false,
+                isSpayingWater: false,
+                isFertilizer: false,
+                isSprayingInsect: false,
                 plantLevel: 0,
                 wateringLevel: 0,
                 sprayLevel: 0,
@@ -32,7 +35,8 @@ const createdPlants = createSlice({
             [8, {}],
             [9, {}]
         ]
-    )},
+        ),
+    },
     reducers: {
         createPlant: (state, action) => {
             const plant = state.value.get(action.payload.scene);
@@ -43,6 +47,9 @@ const createdPlants = createSlice({
             plant.currentState = 'initial';
             plant.isActive = true;
             plant.isWatering = false;
+            plant.isSpayingWater = false;
+            plant.isFertilizer = false;
+            plant.isSprayingInsect = false;
             plant.plantLevel = 1;
             plant.wateringLevel = 0;
             plant.sprayLevel= 0;
@@ -52,9 +59,33 @@ const createdPlants = createSlice({
             plant.fertilizerLevel = 0;
             plant.diseaseLevel = 0;
         },
+        changeWatering: (state, action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.isWatering = !(plant.isWatering);
+            plant.wateringLevel = action.payload.wateringLevel;
+        },
+        changeSprayingWater: (state, action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.isSpayingWater = !(plant.isSpayingWater);
+            plant.wateringLevel = action.payload.wateringLevel;
+        },
+        changeFertilizer: (state, action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.isFertilizer = !(plant.isFertilizer);
+            plant.fertilizerLevel = action.payload.fertilizerLevel;
+        },
+        changeSprayingInsect: (state, action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.isSprayingInsect = !(plant.isSprayingInsect);
+            plant.diseaseLevel = action.payload.diseaseLevel;
+        },
     }
 }
 )
 
 export const createPlant = createdPlants.actions.createPlant;
+export const changeWatering = createdPlants.actions.changeWatering;
+export const changeSprayingWater = createdPlants.actions.changeSprayingWater;
+export const changeFertilizer = createdPlants.actions.changeFertilizer;
+export const changeSprayingInsect = createdPlants.actions.changeSprayingInsect;
 export default createdPlants.reducer;

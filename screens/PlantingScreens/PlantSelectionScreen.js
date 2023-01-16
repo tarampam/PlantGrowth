@@ -1,17 +1,9 @@
 import Button from '../../components/ui/Button';
 import {useState} from "react";
-import {View, StyleSheet, FlatList, Pressable, Text, Platform, Image} from "react-native";
-import {images} from "../../theme/images";
+import {View, StyleSheet, FlatList, Pressable, Text, Platform, Image, Alert} from "react-native";
 import {Colors} from '../../constants/styles'
+import {CATEGORIES} from '../../store/dummy-data'
 
-export const CATEGORIES = [
-    {id:'1', title:'Monstera', image: images.logo},
-{id:'2', title:'Pilea', image:images.logo},
-{id:'3', title:'Filodendron', image:images.logo},
-{id:'4', title:'Dracena obrzeżona', image:images.logo},
-{id:'5', title:'Sensiwiera', image:images.logo},
-{id:'6', title:'Storczyk falenopsis', image:images.logo},
-];
 
 function CategoryGridTile({title, image, gridId,activePlant, onPress}) {
     return <View style={styles.gridItem}>
@@ -32,17 +24,19 @@ function CategoryGridTile({title, image, gridId,activePlant, onPress}) {
 
 function PlantSelectionScreen({navigation, route}){
     const [idPlant, setIdPlant] = useState(0);
+    const [selectedPlant, setSelectedPlant] = useState({})
     const {idPlace} = route.params;
 
     function renderPlantItem(itemData) {
         function pressHandler(){
             setIdPlant(itemData.item.id);
+            setSelectedPlant(itemData.item);
 
         }
 
         return (<CategoryGridTile
             title ={itemData.item.title}
-            image={itemData.item.image}
+            image={itemData.item.gridImage}
             gridId={itemData.item.id}
             activePlant={idPlant}
             onPress = {pressHandler}
@@ -56,8 +50,11 @@ function PlantSelectionScreen({navigation, route}){
             <Button
                 title='Dalej'
                 onPress={() => {
-                    console.log(idPlant)
-                    navigation.navigate('Wybór ziemi', {idPlant: idPlant, idPlace: idPlace})
+                    if(idPlant === 0){
+                        Alert.alert('Błąd wyboru kwiatka','Wybierz kwiatka, żeby przejść dalej!');
+                    }else {
+                        navigation.navigate('Wybór ziemi', {idPlant: selectedPlant, idPlace: idPlace})
+                    }
 
                 }}
             >

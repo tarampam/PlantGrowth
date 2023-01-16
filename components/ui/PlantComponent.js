@@ -1,8 +1,6 @@
 import {Image, View} from "react-native";
 import {images} from "../../theme/images";
-import React, {useState} from "react";
-
-
+import React from "react";
 
 function WateringPlant(){
     return (
@@ -13,12 +11,43 @@ function WateringPlant(){
     )
 }
 
-function PlantComponent(){
-    const [isWatering, setIsWatering] = useState(false);
+function FertilizerPlant(){
+    return (
+        <Image
+            style={{width:100, height:100, bottom: 80,
+                resizeMode: 'contain', position:'absolute'}}
+            source={images.fratelizer}/>
+    )
+}
+
+function SprayingPlant(){
+    return (
+        <Image
+            style={{width:140, height:140, bottom: 40,
+                resizeMode: 'contain', position:'absolute'}}
+            source={images.spraying}/>
+    )
+}
+
+function SprayingInsect(){
+    return (
+        <Image
+            style={{width:140, height:140, bottom: 40,
+                resizeMode: 'contain', position:'absolute'}}
+            source={images.sprayingInsect}/>
+    )
+}
+
+function PlantComponent(props){
     return (
         <View >
-            {isWatering? <WateringPlant/>: null}
-            <Image source={images.animatedPlant} style={{width: 100, height: 100, bottom: 20}}/>
+            {props.createdPlant.get(props.idPlace).isSprayingInsect? <SprayingInsect/>: null}
+            {props.createdPlant.get(props.idPlace).isFertilizer? <FertilizerPlant/>: null}
+            {props.createdPlant.get(props.idPlace).isSpayingWater? <SprayingPlant/>: null}
+            {props.createdPlant.get(props.idPlace).isWatering? <WateringPlant/>: null}
+            <Image source={props.createdPlant.get(props.idPlace).currentImage} style={{width: 100, height: 100, bottom: 20,
+                resizeMode: 'contain'}}/>
+
         </View>
     )
 }

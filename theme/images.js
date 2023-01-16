@@ -8,6 +8,10 @@ import fertilizer from '../assets/images/seeds-fertilizer-svgrepo-com (3).svg';
 import animatedPlant from '../assets/images/animated-plant-image.gif';
 import bigPot from '../assets/images/doniczka.png';
 import wateringCan from '../assets/images/watering-can.gif';
+import fratelizer from '../assets/images/fertilizer.gif';
+import spraying from '../assets/images/spraying.gif';
+import sprayingInsect from '../assets/images/sprayingInsect.gif';
+import initialPlant from '../assets/images/initial-Plant.gif';
 
 import potLayerBlank1 from '../assets/images/layers/warstwa1-brak.png';
 import potLayerBlank2 from '../assets/images/layers/warstwa2-brak.png';
@@ -56,6 +60,10 @@ export const images = {
   animatedPlant: animatedPlant,
   bigPot: bigPot,
   wateringCan: wateringCan,
+  fratelizer: fratelizer,
+  spraying: spraying,
+  sprayingInsect: sprayingInsect,
+  initialPlant: initialPlant,
 }
 
 export const layerImages = {

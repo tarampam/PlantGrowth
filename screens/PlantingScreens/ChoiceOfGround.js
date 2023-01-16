@@ -1,7 +1,7 @@
 import Button from '../../components/ui/Button';
 import { useDispatch} from "react-redux";
 import {createPlant} from "../../store/redux/plants";
-import {Image, StyleSheet, Pressable, SafeAreaView} from "react-native";
+import {Image, StyleSheet, Pressable, SafeAreaView, Alert} from "react-native";
 import {images, layerImages} from "../../theme/images";
 import React, {useState} from "react";
 
@@ -98,11 +98,22 @@ function ChoiceOfGround({route,navigation}){
             <Button
                 title='Dalej'
                 onPress={() => {
-                    navigation.navigate('Simulator')
-                    console.log('Plant id: ',idPlant)
-                    console.log('Place id: ',idPlace)
-                    new Promise(() => {dispatch(createPlant({idPlant:idPlant, scene: idPlace, mapOfGround: mapOfGround}))});
-                    // console.log(createdPlant);
+                    let isEveryLayerField = true;
+                    mapOfGround.forEach((value)=> isEveryLayerField = !!value?.groundId);
+                    if(isEveryLayerField) {
+                        navigation.navigate('Simulator')
+                        new Promise(() => {
+                            dispatch(createPlant(
+                                {
+                                    idPlant: idPlant.id,
+                                    scene: idPlace,
+                                    currentImage: idPlant.initialImage,
+                                    mapOfGround: mapOfGround
+                                }))
+                        });
+                    } else {
+                        Alert.alert('Bład wyboru ziemi','Wybierz ziemię dla każdej warstwy, żeby przejść dalej!')
+                    }
                 }}
             >
                 Dalej
