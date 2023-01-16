@@ -15,18 +15,19 @@ function SquareComponent(){
 
 function SquarePlus(props) {
     const navigation = useNavigation();
-    const createdPlant = useSelector((state) => state.createdPlants.value)
+    const createdPlant = useSelector((state) => state.createdPlants.value);
     return (
         <TouchableOpacity style={[styles.square, {left: props.left, top: props.top}]} onPress={() => {
             if (createdPlant.get(props.id).isActive) {
-                console.log('przekazano')
+                // console.log('przekazano')
+                props.setFeeds(props.id, !props.isDisplay);
             } else {
                 navigation.navigate('Wybór rośliny', {idPlace: props.id})
             }
         }
         }
                           id={props.id}>
-            {createdPlant.get(props.id).isActive ? <PlantComponent />: <SquareComponent />}
+            {createdPlant.get(props.id).isActive ? <PlantComponent idPlace={props.id}  createdPlant={createdPlant} />: <SquareComponent />}
         </TouchableOpacity>
     )
 }
