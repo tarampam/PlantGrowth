@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 
 import { Colors } from '../../constants/styles';
 
@@ -13,7 +13,7 @@ function Input({
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        style={[styles.input, isInvalid && styles.inputInvalid]}
+        style={styles.input}
         placeholder = {label}
         autoCapitalize={false}
         keyboardType={keyboardType}

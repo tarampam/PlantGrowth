@@ -12,7 +12,6 @@ function SquareComponent(){
         <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={0.4}  />
     )
 }
-
 function SquarePlus(props) {
     const navigation = useNavigation();
     const createdPlant = useSelector((state) => state.createdPlants.value);
@@ -20,7 +19,7 @@ function SquarePlus(props) {
         <TouchableOpacity style={[styles.square, {left: props.left, top: props.top}]} onPress={() => {
             if (createdPlant.get(props.id).isActive) {
                 // console.log('przekazano')
-                props.setFeeds(props.id, !props.isDisplay);
+                props.setFeeds(props.id, !props.isDisplay, createdPlant);
             } else {
                 navigation.navigate('Wybór rośliny', {idPlace: props.id})
             }

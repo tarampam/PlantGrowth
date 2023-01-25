@@ -5,8 +5,8 @@ import React from "react";
 function WateringPlant(){
     return (
         <Image
-            style={{width:150, height:150, bottom: 40,
-                resizeMode: 'contain', position:'absolute'}}
+            style={{width:150, height:150, bottom: 120,
+                resizeMode: 'contain', position:'absolute', zIndex:2}}
             source={images.wateringCan}/>
     )
 }
@@ -14,8 +14,8 @@ function WateringPlant(){
 function FertilizerPlant(){
     return (
         <Image
-            style={{width:100, height:100, bottom: 80,
-                resizeMode: 'contain', position:'absolute'}}
+            style={{width:100, height:100, bottom: 140,
+                resizeMode: 'contain', position:'absolute', zIndex:2}}
             source={images.fratelizer}/>
     )
 }
@@ -23,8 +23,8 @@ function FertilizerPlant(){
 function SprayingPlant(){
     return (
         <Image
-            style={{width:140, height:140, bottom: 40,
-                resizeMode: 'contain', position:'absolute'}}
+            style={{width:140, height:140, bottom: 80,
+                resizeMode: 'contain', position:'absolute', zIndex:2}}
             source={images.spraying}/>
     )
 }
@@ -32,8 +32,8 @@ function SprayingPlant(){
 function SprayingInsect(){
     return (
         <Image
-            style={{width:140, height:140, bottom: 40,
-                resizeMode: 'contain', position:'absolute'}}
+            style={{width:140, height:140, bottom: 80,
+                resizeMode: 'contain', position:'absolute', zIndex:2}}
             source={images.sprayingInsect}/>
     )
 }
@@ -43,9 +43,9 @@ function PlantComponent(props){
         <View >
             {props.createdPlant.get(props.idPlace).isSprayingInsect? <SprayingInsect/>: null}
             {props.createdPlant.get(props.idPlace).isFertilizer? <FertilizerPlant/>: null}
-            {props.createdPlant.get(props.idPlace).isSpayingWater? <SprayingPlant/>: null}
+            {props.createdPlant.get(props.idPlace).isSprayingWater? <SprayingPlant/>: null}
             {props.createdPlant.get(props.idPlace).isWatering? <WateringPlant/>: null}
-            <Image source={props.createdPlant.get(props.idPlace).currentImage} style={{width: 100, height: 100, bottom: 20,
+            <Image source={props.createdPlant.get(props.idPlace).currentImage} style={{width: 180, height: 180, bottom: 85, right: 50,
                 resizeMode: 'contain'}}/>
 
         </View>
