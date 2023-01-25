@@ -11,9 +11,11 @@ import SquarePlus from "../components/ui/SquarePlus";
 function WindowSimulatorScreen() {
     const [plantId, setPlantId] = useState(undefined);
     const [isDisplay, setIsDisplay] = useState(false);
-    const setFeeds = (plantId, isDisplay) => {
+    const [createdPlant, setCreatedPlant] = useState({})
+    const setFeeds = (plantId, isDisplay, createdPlant) => {
         setPlantId(plantId);
         setIsDisplay(isDisplay);
+        setCreatedPlant(createdPlant);
     }
 
     //TODO waiting for backend
@@ -34,7 +36,7 @@ function WindowSimulatorScreen() {
           <SquarePlus left={60} top={330} id={1} setFeeds={setFeeds} isDisplay={isDisplay}/>
           <SquarePlus left={160} top={330} id={2} setFeeds={setFeeds} isDisplay={isDisplay}/>
           <SquarePlus left={260} top={330} id={3} setFeeds={setFeeds} isDisplay={isDisplay}/>
-        <FeedButtons isDisplay={isDisplay} plantId = {plantId} setFeeds={setFeeds}/>
+        <FeedButtons isDisplay={isDisplay} plantId = {plantId} setFeeds={setFeeds} createdPlant={createdPlant}/>
         </ImageBackground>
     </View>
   );

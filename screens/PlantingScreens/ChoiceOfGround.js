@@ -1,9 +1,12 @@
 import Button from '../../components/ui/Button';
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import {createPlant} from "../../store/redux/plants";
 import {Image, StyleSheet, Pressable, SafeAreaView, Alert} from "react-native";
 import {images, layerImages} from "../../theme/images";
 import React, {useState} from "react";
+import {countGround, countLighting, checkLightingPlant} from '../../simulationHandler/Simulation';
+import {GROUND_ITEMS} from '../../store/dummy-data';
+
 
 
 import Modal from 'react-native-modal';
@@ -13,6 +16,8 @@ function ChoiceOfGround({route,navigation}){
     const {idPlant, idPlace} = route.params;
     const [choosenId, setChossenId] = useState(false);
     const dispatch = useDispatch();
+    const season = useSelector((state) => state.userSettings.season);
+    const roomDirection = useSelector((state) => state.userSettings.roomDirection);
 
     const [actionSheet, setActionSheet] = useState(false);
     const closeActionSheet = () => setActionSheet(false);
@@ -33,43 +38,6 @@ function ChoiceOfGround({route,navigation}){
         [5,{}]
     ]));
 
-    const actionItems = [
-        {
-            id: 1,
-            label: 'Podłoże uniwersalne z torfu wysokiego',
-            images: [layerImages.potTorfLayer1,layerImages.potTorfLayer2,layerImages.potTorfLayer3,layerImages.potTorfLayer4,layerImages.potTorfLayer5],
-        },
-        {
-            id: 2,
-            label: 'Wysokiej jakości podłoże z torfu wysokiego',
-            images: [layerImages.potTorfLayer1,layerImages.potTorfLayer2,layerImages.potTorfLayer3,layerImages.potTorfLayer4,layerImages.potTorfLayer5],
-        },
-        {
-            id: 3,
-            label: 'Czips kokosowy',
-            images: [layerImages.potCoconutLayer1,layerImages.potCoconutLayer2,layerImages.potCoconutLayer3,layerImages.potCoconutLayer4,layerImages.potCoconutLayer5],
-        },
-        {
-            id: 4,
-            label: 'Keramzyt',
-            images: [layerImages.potKermazytLayer1,layerImages.potKermazytLayer2,layerImages.potKermazytLayer3,layerImages.potKermazytLayer4,layerImages.potKermazytLayer5],
-        },
-        {
-            id: 5,
-            label: 'Perlit',
-            images: [layerImages.potPerlitLayer1,layerImages.potPerlitLayer2,layerImages.potPerlitLayer3,layerImages.potPerlitLayer4,layerImages.potPerlitLayer5],
-        },
-        {
-            id: 6,
-            label: 'Piasek bądź drobny żwir',
-            images: [layerImages.potGritLayer1,layerImages.potGritLayer2,layerImages.potGritLayer3,layerImages.potGritLayer4,layerImages.potGritLayer5],
-        },
-        {
-            id: 7,
-            label: 'Mieszanka perlitu oraz keramzytu',
-            images: [layerImages.potKermazytLayer1,layerImages.potKermazytLayer2,layerImages.potKermazytLayer3,layerImages.potKermazytLayer4,layerImages.potKermazytLayer5],
-        },
-    ];
 
     function Layer({layerId,src1,src2, top, left, width}){
 
@@ -99,8 +67,15 @@ function ChoiceOfGround({route,navigation}){
                 title='Dalej'
                 onPress={() => {
                     let isEveryLayerField = true;
-                    mapOfGround.forEach((value)=> isEveryLayerField = !!value?.groundId);
+                    mapOfGround.forEach((value)=> {
+                        if (!value?.groundId) {
+                            isEveryLayerField = false;
+                        }
+                    });
                     if(isEveryLayerField) {
+                        const groundPoints = countGround(idPlant.correctGround,mapOfGround);
+                        const placeSunPoints = countLighting(roomDirection,season,idPlace);
+                        const plantLightingPoints = checkLightingPlant(idPlant.maxLighting, idPlant.minLighting,placeSunPoints);
                         navigation.navigate('Simulator')
                         new Promise(() => {
                             dispatch(createPlant(
@@ -108,9 +83,13 @@ function ChoiceOfGround({route,navigation}){
                                     idPlant: idPlant.id,
                                     scene: idPlace,
                                     currentImage: idPlant.initialImage,
-                                    mapOfGround: mapOfGround
+                                    mapOfGround: mapOfGround,
+                                    groundPoints: groundPoints,
+                                    plantLightingPoints: plantLightingPoints,
+                                    placeSunPoints: placeSunPoints,
                                 }))
                         });
+
                     } else {
                         Alert.alert('Bład wyboru ziemi','Wybierz ziemię dla każdej warstwy, żeby przejść dalej!')
                     }
@@ -126,7 +105,7 @@ function ChoiceOfGround({route,navigation}){
                 }}
             >
                 <ActionSheet
-                    actionItems={actionItems}
+                    actionItems={GROUND_ITEMS}
                     onPress={listOnPress}
                     onCancel={closeActionSheet}
                 />

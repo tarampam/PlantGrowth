@@ -2,7 +2,7 @@ import Button from '../../components/ui/Button';
 import {useState} from "react";
 import {View, StyleSheet, FlatList, Pressable, Text, Platform, Image, Alert} from "react-native";
 import {Colors} from '../../constants/styles'
-import {CATEGORIES} from '../../store/dummy-data'
+import {SIMULATOR_PLANT} from '../../store/dummy-data'
 
 
 function CategoryGridTile({title, image, gridId,activePlant, onPress}) {
@@ -45,7 +45,7 @@ function PlantSelectionScreen({navigation, route}){
 
     return (
         <View style={styles.rootContainer}>
-            <FlatList data={CATEGORIES} keyExtractor={(item) => item.id}  renderItem={renderPlantItem} numColumns={2}/>
+            <FlatList data={SIMULATOR_PLANT} keyExtractor={(item) => item.id}  renderItem={renderPlantItem} numColumns={2}/>
             <View style={styles.button2}>
             <Button
                 title='Dalej'
@@ -120,6 +120,8 @@ const styles = StyleSheet.create({
     image:{
         height: 80,
         width: 75,
+        resizeMode: 'contain',
+
     },
     button2:{
         marginBottom: 20,

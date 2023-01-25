@@ -1,20 +1,23 @@
 import {TouchableOpacity, StyleSheet, View} from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faBugSlash, faCircle, faDroplet} from "@fortawesome/free-solid-svg-icons";
-import {SvgFertilizer, SvgPlantOnHand} from "./Svg";
+import {faBugSlash, faCircle, faDroplet, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {SvgFertilizer} from "./Svg";
+import {increaseHumidity} from '../../simulationHandler/Simulation';
 
 
 import Modal from 'react-native-modal';
 import ActionSheet from "../../components/ui/ActionSheet";
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
-import {changeWatering,changeSprayingWater,changeFertilizer,changeSprayingInsect} from '../../store/redux/plants'
+import {useDispatch, useSelector} from "react-redux";
+import {changeWatering,changeSprayingWater,changeFertilizer,changeSprayingInsect, changeWateringFlag, changeSprayingFlag, curePlantDisease,addFertilizer} from '../../store/redux/plants'
+import {fertilizerList, diseaseList, wateringList} from "../../store/dummy-data";
 
 function FeedButtons(props){
     const [actionSheet, setActionSheet] = useState(false);
     const [onPressId, setOnPressId] = useState(0);
     const closeActionSheet = () => setActionSheet(false);
     const dispatch = useDispatch();
+    const seasonSettings = useSelector((state) => state.userSettings.season);
 
     function displayHandler(){
         if(props.isDisplay){
@@ -28,93 +31,86 @@ function FeedButtons(props){
     function listOnPress(value){
         closeActionSheet();
         props.setFeeds(props.plantId, !props.isDisplay);
-        console.log("podlewanie")
         switch(value.id){
             case 1:
                 dispatch(changeWatering(
                     {
                         scene: props.plantId,
-                        wateringLevel: 0,
-                    }))
+                        humidityPoints: increaseHumidity(false),
+                    })
+                )
+                dispatch(changeWateringFlag({scene: props.plantId,}))
                 setTimeout(()=> {
-                    dispatch(changeWatering({scene: props.plantId}))
+                    dispatch(changeWateringFlag({scene: props.plantId}))
                 }, 2000)
                 break;
             case 2:
                 dispatch(changeSprayingWater(
                     {
                         scene: props.plantId,
-                        wateringLevel: 0,
-                    }))
+                        humidityPoints: increaseHumidity(true),
+                    })
+                )
+                dispatch(changeSprayingFlag({scene: props.plantId,}))
                 setTimeout(()=> {
-                    dispatch(changeSprayingWater({scene: props.plantId}))
+                    dispatch(changeSprayingFlag({scene: props.plantId}))
                 }, 2000)
                 break;
             case 3:
+                dispatch(addFertilizer({scene: props.plantId, fertilizerType: value.label, season: seasonSettings}))
                 dispatch(changeFertilizer(
                     {
                         scene: props.plantId,
-                        fertilizerLevel: 0,
                     }))
                 setTimeout(()=> {
                     dispatch(changeFertilizer({scene: props.plantId}))
                 }, 2000)
                 break;
             case 4:
+                dispatch(addFertilizer({scene: props.plantId, fertilizerType: value.label, season: seasonSettings}))
                 dispatch(changeFertilizer(
                     {
                         scene: props.plantId,
-                        fertilizerLevel: 0,
                     }))
                 setTimeout(()=> {
                     dispatch(changeFertilizer({scene: props.plantId}))
                 }, 2000)
                 break;
             case 5:
+                dispatch(addFertilizer({scene: props.plantId, fertilizerType: value.label, season: seasonSettings}))
                 dispatch(changeFertilizer(
                     {
                         scene: props.plantId,
-                        fertilizerLevel: 0,
                     }))
                 setTimeout(()=> {
                     dispatch(changeFertilizer({scene: props.plantId}))
                 }, 2000)
                 break;
             case 6:
-                dispatch(changeFertilizer(
-                    {
-                        scene: props.plantId,
-                        fertilizerLevel: 0,
-                    }))
-                setTimeout(()=> {
-                    dispatch(changeFertilizer({scene: props.plantId}))
-                }, 2000)
-                break;
-            case 7:
+                dispatch(curePlantDisease({scene: props.plantId, cure: value}));
                 dispatch(changeSprayingInsect(
                     {
                         scene: props.plantId,
-                        diseaseLevel: 0,
+                    }))
+                setTimeout(()=> {
+                    dispatch(changeSprayingInsect({scene: props.plantId}))
+                }, 2000)
+                break;
+            case 7:
+                dispatch(curePlantDisease({scene: props.plantId, cure: value}));
+                dispatch(changeSprayingInsect(
+                    {
+                        scene: props.plantId,
                     }))
                 setTimeout(()=> {
                     dispatch(changeSprayingInsect({scene: props.plantId}))
                 }, 2000)
                 break;
             case 8:
+                dispatch(curePlantDisease({scene: props.plantId, cure: value}));
                 dispatch(changeSprayingInsect(
                     {
                         scene: props.plantId,
-                        diseaseLevel: 0,
-                    }))
-                setTimeout(()=> {
-                    dispatch(changeSprayingInsect({scene: props.plantId}))
-                }, 2000)
-                break;
-            case 9:
-                dispatch(changeSprayingInsect(
-                    {
-                        scene: props.plantId,
-                        diseaseLevel: 0,
                     }))
                 setTimeout(()=> {
                     dispatch(changeSprayingInsect({scene: props.plantId}))
@@ -122,55 +118,12 @@ function FeedButtons(props){
                 break;
         }
     }
-    const wateringList = [
-        {
-            id: 1,
-            label: 'Podlej kwiatka',
-        },
-        {
-            id: 2,
-            label: 'Spryskaj kwiatka wodą',
-        }
-    ];
-
-    const fertilizerList = [
-        {
-            id: 3,
-            label: 'Nawóz mineralny do roślin domowych o ozdobnych liściach',
-        },
-        {
-            id: 4,
-            label: 'Nawóz Biohumus do roślin zielonych',
-        },
-        {
-            id: 5,
-            label: 'Nawóz do kaktusów i sukulentów',
-        },
-        {
-            id: 6,
-            label: 'Nawóz do roślin kwitnących',
-        }
-    ]
-
-    const insectList = [
-        {
-            id: 7,
-            label: 'Spray na szarą pleśń',
-        },
-        {
-            id: 8,
-            label: 'Spray grzybobójczy',
-        },
-        {
-            id: 9,
-            label: 'Spray na choroby i szkodniki',
-        },
-    ]
+    
 
     const [mapOfList, setMapOfList] = useState(new Map([
         [1,wateringList],
         [2,fertilizerList],
-        [3,insectList]
+        [3,diseaseList]
     ]))
 
     return (
@@ -201,7 +154,7 @@ function FeedButtons(props){
             setActionSheet(true)}}
         >
             <FontAwesomeIcon icon={faCircle} color={'white'}   size={55} secondaryColor={'grey'} secondaryOpacity={0.4}  />
-            <SvgPlantOnHand style={styles.circleFill} size={30} color={'black'}/>
+            <FontAwesomeIcon icon={faTrash} color={'black'} size={30} style={styles.circleFill} />
         </TouchableOpacity>
         <Modal
             isVisible={actionSheet}

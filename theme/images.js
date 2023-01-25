@@ -5,13 +5,30 @@ import wallBg from '../assets/images/white-blank-concrete-wall-with-a-wooden-flo
 import shelf from '../assets/images/shelf.png';
 import floorBg from '../assets/images/white-blank-concrete-wall-with-a-wooden-floor2.jpg';
 import fertilizer from '../assets/images/seeds-fertilizer-svgrepo-com (3).svg';
-import animatedPlant from '../assets/images/animated-plant-image.gif';
 import bigPot from '../assets/images/doniczka.png';
 import wateringCan from '../assets/images/watering-can.gif';
 import fratelizer from '../assets/images/fertilizer.gif';
 import spraying from '../assets/images/spraying.gif';
 import sprayingInsect from '../assets/images/sprayingInsect.gif';
+
 import initialPlant from '../assets/images/initial-Plant.gif';
+import overwateringLevelOne from '../assets/images/etap-początkowy_przelany.gif';
+import wiltingLevelOne from '../assets/images/etap-początkowy_ususzony.gif';
+import deadPlantLevelOne from '../assets/images/etap-początkowy_umarty.gif';
+import monsteraLevelTwo from '../assets/images/etap-środkowy.gif';
+import overwateringMonsteraLevelTwo from '../assets/images/etap-środkowy_przelany.gif';
+import monsteraLevelThree from '../assets/images/etap-końcowy.gif';
+import overwateringMonsteraLevelThree from '../assets/images/etap-końcowy_przelany.gif';
+import wiltingMonsteraLevelTwo from '../assets/images/etap-środkowy_ususzony.gif';
+import wiltingMonsteraLevelThree from '../assets/images/etap-końcowy_ususzony.gif';
+import deadPlant from '../assets/images/deadPlant.gif';
+import sickPlant from '../assets/images/sickPlant.gif';
+
+import monstera from '../assets/images/monstera.jpg';
+import pilea from '../assets/images/pilea.jpg';
+import fikus from '../assets/images/fikus.jpg';
+import filodendron from '../assets/images/filodendronjpg.jpg';
+import sansewiera from '../assets/images/sansewiera.jpg';
 
 import potLayerBlank1 from '../assets/images/layers/warstwa1-brak.png';
 import potLayerBlank2 from '../assets/images/layers/warstwa2-brak.png';
@@ -57,13 +74,28 @@ export const images = {
   floorBg: floorBg,
   shelf: shelf,
   fertilizer: fertilizer,
-  animatedPlant: animatedPlant,
   bigPot: bigPot,
   wateringCan: wateringCan,
   fratelizer: fratelizer,
   spraying: spraying,
   sprayingInsect: sprayingInsect,
   initialPlant: initialPlant,
+  overwateringLevelOne: overwateringLevelOne,
+  wiltingLevelOne: wiltingLevelOne,
+  deadPlantLevelOne: deadPlantLevelOne,
+  monsteraLevelTwo: monsteraLevelTwo,
+  overwateringMonsteraLevelTwo: overwateringMonsteraLevelTwo,
+  wiltingMonsteraLevelTwo: wiltingMonsteraLevelTwo,
+  monsteraLevelThree: monsteraLevelThree,
+  overwateringMonsteraLevelThree: overwateringMonsteraLevelThree,
+  wiltingMonsteraLevelThree: wiltingMonsteraLevelThree,
+  deadPlant: deadPlant,
+  sickPlant: sickPlant,
+  monstera: monstera,
+  pilea: pilea,
+  fikus: fikus,
+  filodendron: filodendron,
+  sansewiera: sansewiera,
 }
 
 export const layerImages = {

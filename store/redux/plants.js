@@ -1,5 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import { enableMapSet } from 'immer';
+import {SIMULATOR_PLANT} from '../dummy-data';
+import {processPlant,cureDisease, fertilizerHelper} from '../../simulationHandler/Simulation';
 
 enableMapSet();
 const createdPlants = createSlice({
@@ -13,18 +15,30 @@ const createdPlants = createSlice({
                 currentImage: '',
                 currentState: '',
                 isActive: false,
+                isAlive: true,
                 isWatering: false,
-                isSpayingWater: false,
+                isSprayingWater: false,
                 isFertilizer: false,
                 isSprayingInsect: false,
-                plantLevel: 0,
-                wateringLevel: 0,
-                sprayLevel: 0,
-                sunLevel: 0,
-                mapOfGround: {},
-                groundLevel: 0,
-                fertilizerLevel: 0,
+                placeSunPoints: 0, //punkty jakie otrzymuje stanowisko w konfiguracji strony świata i pory roku
+                mapOfGround: {}, //mapa ziemi kwiatka
+                missedGroundPoints: 0, //stracone punkty ziemi
+                fertilizerPoints: 0,
+                fertilizerCurrentCycle: 0,
+                fertilizerType: '',
+                currentDiseaseCycle: 0,
                 diseaseLevel: 0,
+                typeOfDisease: '',
+
+
+                plantLevel: 0,
+                plantPoints: 0,
+                groundPoints: 0, //punkty jakie otrzymuje kwiatek po wybraniu odpowiedniej ziemi
+                plantLightingPoints: 0, //punkty jakie otrzymuje kwiatek po uwzględnieniu zapotrzebowania
+                humidityPoints: 0, //punkty wilgotności, na które nakłada się podlewanie i spryskiwanie
+                overwateringLevel: 0,
+                wiltingLevel: 0,
+                wiltingCycle: 0,
             }],
             [2, {}],
             [3, {}],
@@ -46,46 +60,89 @@ const createdPlants = createSlice({
             plant.currentImage = action.payload.currentImage;
             plant.currentState = 'initial';
             plant.isActive = true;
+            plant.isAlive = true;
             plant.isWatering = false;
-            plant.isSpayingWater = false;
+            plant.isSprayingWater = false;
             plant.isFertilizer = false;
             plant.isSprayingInsect = false;
             plant.plantLevel = 1;
-            plant.wateringLevel = 0;
-            plant.sprayLevel= 0;
-            plant.sunLevel = action.payload.sunLevel;
+            plant.placeSunPoints = action.payload.placeSunPoints;
+            plant.humidityPoints = 0;
+            plant.plantLightingPoints = action.payload.plantLightingPoints;
             plant.mapOfGround = action.payload.mapOfGround;
-            plant.groundLevel = action.payload.groundLevel;
-            plant.fertilizerLevel = 0;
+            plant.groundPoints = action.payload.groundPoints;
+            plant.missedGroundPoints = 100 - action.payload.groundPoints;
+            plant.fertilizerPoints = 0;
+            plant.fertilizerCurrentCycle = 0;
+            plant.fertilizerType = '';
+            plant.currentDiseaseCycle = 0;
             plant.diseaseLevel = 0;
+            plant.typeOfDisease = '';
+            plant.plantPoints = 0;
+            plant.overwateringLevel = 0;
+            plant.wiltingLevel = 0;
+            plant.wiltingCycle = 0;
         },
         changeWatering: (state, action) => {
             const plant = state.value.get(action.payload.scene);
-            plant.isWatering = !(plant.isWatering);
-            plant.wateringLevel = action.payload.wateringLevel;
+            plant.wateringPoints = action.payload.wateringPoints;
+            plant.humidityPoints += action.payload.humidityPoints;
         },
         changeSprayingWater: (state, action) => {
             const plant = state.value.get(action.payload.scene);
-            plant.isSpayingWater = !(plant.isSpayingWater);
-            plant.wateringLevel = action.payload.wateringLevel;
+            plant.humidityPoints += action.payload.humidityPoints;
+        },
+        changeWateringFlag: (state, action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.isWatering = !(plant.isWatering);
+        },
+        changeSprayingFlag: (state, action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.isSprayingWater = !(plant.isSprayingWater);
         },
         changeFertilizer: (state, action) => {
             const plant = state.value.get(action.payload.scene);
             plant.isFertilizer = !(plant.isFertilizer);
-            plant.fertilizerLevel = action.payload.fertilizerLevel;
         },
         changeSprayingInsect: (state, action) => {
             const plant = state.value.get(action.payload.scene);
             plant.isSprayingInsect = !(plant.isSprayingInsect);
-            plant.diseaseLevel = action.payload.diseaseLevel;
         },
+        curePlantDisease: (state,action) => {
+            const plant = state.value.get(action.payload.scene);
+            const cure = action.payload.cure;
+            cureDisease(plant,cure);
+        },
+        addFertilizer: (state,action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.fertilizerType = action.payload.fertilizerType;
+            const simulatorPlantsMap = new Map(SIMULATOR_PLANT.map((obj) => [obj.id, obj]));
+            fertilizerHelper(plant, simulatorPlantsMap.get(plant.idPlant), action.payload.season);
+        },
+        countSimulationPoints: (state, action) => {
+            const createdPlant = state.value;
+            const simulatorPlantsMap = new Map(SIMULATOR_PLANT.map((obj) => [obj.id, obj]));
+            createdPlant.forEach((value, key, map) => {
+                if (!value.isActive){
+                    return;
+                }
+                processPlant(value, simulatorPlantsMap);
+
+            });
+        }
     }
 }
 )
 
+
 export const createPlant = createdPlants.actions.createPlant;
 export const changeWatering = createdPlants.actions.changeWatering;
 export const changeSprayingWater = createdPlants.actions.changeSprayingWater;
+export const changeWateringFlag = createdPlants.actions.changeWateringFlag;
+export const changeSprayingFlag = createdPlants.actions.changeSprayingFlag;
 export const changeFertilizer = createdPlants.actions.changeFertilizer;
 export const changeSprayingInsect = createdPlants.actions.changeSprayingInsect;
+export const countSimulationPoints = createdPlants.actions.countSimulationPoints;
+export const curePlantDisease = createdPlants.actions.curePlantDisease;
+export const addFertilizer = createdPlants.actions.addFertilizer;
 export default createdPlants.reducer;
