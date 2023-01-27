@@ -66,6 +66,9 @@ import potPerlitLayer5 from '../assets/images/layers/Warstwa5-perlit.png';
 import potCoconutLayer5 from '../assets/images/layers/Warstwa5-kokos.png';
 import potGritLayer5 from '../assets/images/layers/Warstwa5-żwir.png';
 
+import thermometerIcon from '../assets/images/thermometer.png';
+import noWater from '../assets/images/NoWater.png';
+
 export const images = {
   logo: Logo,
   bg_home: homeScreen,
@@ -96,6 +99,8 @@ export const images = {
   fikus: fikus,
   filodendron: filodendron,
   sansewiera: sansewiera,
+  thermometerIcon: thermometerIcon,
+  noWater: noWater,
 }
 
 export const layerImages = {

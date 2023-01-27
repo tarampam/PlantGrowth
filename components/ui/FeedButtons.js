@@ -9,8 +9,18 @@ import Modal from 'react-native-modal';
 import ActionSheet from "../../components/ui/ActionSheet";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {changeWatering,changeSprayingWater,changeFertilizer,changeSprayingInsect, changeWateringFlag, changeSprayingFlag, curePlantDisease,addFertilizer} from '../../store/redux/plants'
-import {fertilizerList, diseaseList, wateringList} from "../../store/dummy-data";
+import {
+    changeWatering,
+    changeSprayingWater,
+    changeFertilizer,
+    changeSprayingInsect,
+    changeWateringFlag,
+    changeSprayingFlag,
+    curePlantDisease,
+    addFertilizer,
+    deletePlant
+} from '../../store/redux/plants'
+import {fertilizerList, diseaseList, wateringList, deleteList} from "../../store/dummy-data";
 
 function FeedButtons(props){
     const [actionSheet, setActionSheet] = useState(false);
@@ -116,6 +126,9 @@ function FeedButtons(props){
                     dispatch(changeSprayingInsect({scene: props.plantId}))
                 }, 2000)
                 break;
+            case 9:
+                dispatch(deletePlant({scene: props.plantId, cure: value}));
+                break;
         }
     }
     
@@ -123,7 +136,8 @@ function FeedButtons(props){
     const [mapOfList, setMapOfList] = useState(new Map([
         [1,wateringList],
         [2,fertilizerList],
-        [3,diseaseList]
+        [3,diseaseList],
+        [4,deleteList]
     ]))
 
     return (
