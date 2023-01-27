@@ -25,7 +25,7 @@ export const SIMULATOR_PLANT = [
         maxHumidity: 70,
         minHumidity: 20,
         decreaseHumidityRate: 5,
-        diseaseRate: 100,
+        diseaseRate: 5,
         diseaseArray: ['plamistość liści','pędziorki'],
         fertilizerDuration: 21,
         fertilizerType: ['Nawóz mineralny do roślin domowych o ozdobnych liściach'],
@@ -227,6 +227,13 @@ export const diseaseList = [
     {
         id: 8,
         label: 'Spray na choroby i szkodniki',
+    },
+]
+
+export const deleteList = [
+    {
+        id: 9,
+        label: 'Usuń roślinę',
     },
 ]
 

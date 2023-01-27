@@ -8,25 +8,13 @@ export const processPlant = (plant, simulatorPlantsMap) => {
     }
     const plantInfo = simulatorPlantsMap.get(plant.idPlant);
     countPoints(plant,plantInfo)
-    if(plant.plantPoints >= levelThreePoints){
-        plant.plantLevel = 3;
-        plant.currentImage = plantInfo.levelThreeImage;
-    } else if (plant.plantPoints >=levelTwoPoints){
-        plant.plantLevel = 2;
-        plant.currentImage = plantInfo.levelTwoImage;
-    } else {
-        plant.plantLevel = 1;
-        plant.currentImage = plantInfo.initialImage;
-    }
-
 
     decreaseHumidity(plant,plantInfo);
     diseaseHelper(plant, plantInfo);
     increaseDiseaseLevel(plant, plantInfo);
     checkFertilizerDuration(plant, plantInfo);
     overwateringHandler(plant, plantInfo);
-    //wiltingHandler(plant, plantInfo);r
-
+    wiltingHandler(plant, plantInfo);
 }
 
 const countPoints = (plant, plantInfo) => {
@@ -39,29 +27,40 @@ const countPoints = (plant, plantInfo) => {
     plantPoints += countHumidityPoints(plantInfo, plant.humidityPoints);
     plantPoints += plant.fertilizerPoints;
     plant.plantPoints += plantPoints;
+
+    if(plant.plantPoints >= levelThreePoints){
+        plant.plantLevel = 3;
+        plant.currentImage = plantInfo.levelThreeImage;
+    } else if (plant.plantPoints >=levelTwoPoints){
+        plant.plantLevel = 2;
+        plant.currentImage = plantInfo.levelTwoImage;
+    } else {
+        plant.plantLevel = 1;
+        plant.currentImage = plantInfo.initialImage;
+    }
 }
 //wilting
 export const wiltingHandler = (plant, plantInfo) => {
-    if (plant.placeSunPoints < plantInfo.minLighting || plant.humidityPoints < plantInfo.minHumidity){
+    if ((plant.placeSunPoints > plantInfo.maxLighting || plant.humidityPoints < plantInfo.minHumidity)
+    && plant.diseaseLevel === 0){
         if (plant.wiltingLevel === 0) {
-            plant.wiltingLevel = 1;
-            plant.wiltingCycle = 0;
+            plant.wiltingCycle++;
+            if  (plant.wiltingCycle > 5) {
+                plant.wiltingLevel = 1;
+            } else{
+                return;
+            }
         }
-        console.log('plant.wiltingLevel',plant.wiltingLevel)
-        console.log('plant.wiltingCycle',plant.wiltingCycle)
+
         plant.wiltingCycle++;
-        console.log('plant.wiltingCycle',plant.wiltingCycle)
-        if  (plant.wiltingCycle === 5) {
+        if  (plant.wiltingCycle > 5) {
             plant.wiltingCycle = 0;
             plant.wiltingLevel++;
         }
-        console.log('plant.wiltingLevel',plant.wiltingLevel)
-        console.log('plant.wiltingCycle',plant.wiltingCycle)
-        if (plant.wiltingLevel === 3) {
+
+        if (plant.wiltingLevel > 3) {
             setDeadPlant(plant, plantInfo)
-            console.log('isdead')
         }
-        console.log('plant.wiltingLevel',plant.wiltingLevel)
         if (plant.plantLevel === 1) {
             plant.currentImage = plantInfo.wiltingLevelOne;
         } else if (plant.plantLevel === 2) {
@@ -71,6 +70,7 @@ export const wiltingHandler = (plant, plantInfo) => {
         }
     } else {
         plant.wiltingLevel = 0;
+        plant.wiltingCycle = 0;
     }
 }
 
@@ -139,6 +139,9 @@ export const cureDisease = (plant, cure) => {
     const diseasePlant = plant.typeOfDisease;
     if(cure.id === cureDiseaseMap.get(diseasePlant).id){
         plant.diseaseLevel--;
+        if (plant.diseaseLevel < 1) {
+            plant.typeOfDisease = '';
+        }
     }
 }
 

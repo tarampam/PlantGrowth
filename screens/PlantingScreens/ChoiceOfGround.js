@@ -82,6 +82,7 @@ function ChoiceOfGround({route,navigation}){
                                 {
                                     idPlant: idPlant.id,
                                     scene: idPlace,
+                                    name: idPlant.title,
                                     currentImage: idPlant.initialImage,
                                     mapOfGround: mapOfGround,
                                     groundPoints: groundPoints,

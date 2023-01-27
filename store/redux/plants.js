@@ -129,6 +129,37 @@ const createdPlants = createSlice({
                 processPlant(value, simulatorPlantsMap);
 
             });
+        },
+        deletePlant: (state, action) => {
+            const plant = state.value.get(action.payload.scene);
+            plant.idPlant = 0;
+            plant.scene = 0;
+            plant.name = '';
+            plant.currentImage = '';
+            plant.currentState = '';
+            plant.isActive = false;
+            plant.isAlive = true;
+            plant.isWatering = false;
+            plant.isSprayingWater = false;
+            plant.isFertilizer = false;
+            plant.isSprayingInsect = false;
+            plant.plantLevel = 0;
+            plant.placeSunPoints = 0;
+            plant.humidityPoints = 0;
+            plant.plantLightingPoints = 0;
+            plant.mapOfGround = {};
+            plant.groundPoints = 0;
+            plant.missedGroundPoints = 0;
+            plant.fertilizerPoints = 0;
+            plant.fertilizerCurrentCycle = 0;
+            plant.fertilizerType = '';
+            plant.currentDiseaseCycle = 0;
+            plant.diseaseLevel = 0;
+            plant.typeOfDisease = '';
+            plant.plantPoints = 0;
+            plant.overwateringLevel = 0;
+            plant.wiltingLevel = 0;
+            plant.wiltingCycle = 0;
         }
     }
 }
@@ -145,4 +176,5 @@ export const changeSprayingInsect = createdPlants.actions.changeSprayingInsect;
 export const countSimulationPoints = createdPlants.actions.countSimulationPoints;
 export const curePlantDisease = createdPlants.actions.curePlantDisease;
 export const addFertilizer = createdPlants.actions.addFertilizer;
+export const deletePlant = createdPlants.actions.deletePlant;
 export default createdPlants.reducer;
