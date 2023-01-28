@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useContext, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {useDispatch} from "react-redux";
 
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -24,6 +25,8 @@ import {SvgFloor, SvgWall, SvgWindow} from "./components/ui/Svg";
 import {Provider} from "react-redux";
 import {Run} from "./simulationHandler/Engine"
 import {store} from "./store/redux/store";
+import {getPlants} from "./util/plantEndpoints";
+import {setPlantsData} from "./store/redux/plants";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -154,14 +157,18 @@ function Navigation() {
 }
 
 function Root(){
-  const [isTryingLogin, setIsTryingLogin] = useState(true);
+    const dispatch = useDispatch();
+    const [isTryingLogin, setIsTryingLogin] = useState(true);
   const authCtx = useContext(AuthContext);
   useEffect(() => {
     async function fetchToken(){
         const storedToken = await AsyncStorage.getItem('token');
+        const userId = await AsyncStorage.getItem('userId');
 
         if(storedToken){
-            authCtx.authenticate(storedToken);
+            authCtx.authenticate(storedToken, userId);
+            const plants = await getPlants();
+            await dispatch(setPlantsData({plants: plants}));
         }
         setIsTryingLogin(false);
     }
