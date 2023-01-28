@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import { enableMapSet } from 'immer';
 import {SIMULATOR_PLANT} from '../dummy-data';
 import {processPlant,cureDisease, fertilizerHelper} from '../../simulationHandler/Simulation';
+import {savePlants} from "../../util/plantEndpoints";
 
 enableMapSet();
 const createdPlants = createSlice({
@@ -127,8 +128,8 @@ const createdPlants = createSlice({
                     return;
                 }
                 processPlant(value, simulatorPlantsMap);
-
             });
+            savePlants(JSON.stringify(Object.fromEntries(createdPlant)))
         },
         deletePlant: (state, action) => {
             const plant = state.value.get(action.payload.scene);
@@ -160,6 +161,9 @@ const createdPlants = createSlice({
             plant.overwateringLevel = 0;
             plant.wiltingLevel = 0;
             plant.wiltingCycle = 0;
+        },
+        setPlantsData: (state, action) => {
+            state.value = action.payload.plants;
         }
     }
 }
@@ -177,4 +181,5 @@ export const countSimulationPoints = createdPlants.actions.countSimulationPoints
 export const curePlantDisease = createdPlants.actions.curePlantDisease;
 export const addFertilizer = createdPlants.actions.addFertilizer;
 export const deletePlant = createdPlants.actions.deletePlant;
+export const setPlantsData = createdPlants.actions.setPlantsData;
 export default createdPlants.reducer;

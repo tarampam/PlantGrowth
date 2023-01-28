@@ -1,7 +1,5 @@
 import {Image, ImageBackground, StyleSheet, View} from 'react-native';
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../store/auth-content';
+import {useState} from 'react';
 import {images} from '../theme/images';
 
 import FeedButtons from "../components/ui/FeedButtons";
@@ -18,17 +16,7 @@ function WindowSimulatorScreen() {
         setCreatedPlant(createdPlant);
     }
 
-    //TODO waiting for backend
-    // const [fetchedMessage, setFetchedMessage] = useState('');
-    //
-    // const authCtx = useContext(AuthContext);
-    // const token = authCtx.token;
-    // useEffect(() => {
-    //     axios.get('https://coursern-67fb2-default-rtdb.firebaseio.com/message.json?auth=' + token
-    //     ).then((response) => {
-    //         setFetchedMessage(response.data);
-    //     });
-    // }, []);
+
   return (
     <View style={styles.rootContainer}>
         <ImageBackground source={images.wallBg} style={styles.imageBg} resizeMode="cover">

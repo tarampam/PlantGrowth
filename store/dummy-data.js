@@ -19,7 +19,7 @@ export const SIMULATOR_PLANT = [
             {numberOfLayer: 4, idGround: 4},
             {numberOfLayer: 5, idGround: 5},
         ],
-        maxLighting: 82,
+        maxLighting: 100,
         minLighting: 25,
         sprayingRequire: 3,
         maxHumidity: 70,
