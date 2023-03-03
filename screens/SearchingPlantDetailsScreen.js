@@ -1,4 +1,4 @@
-import {PLANTS} from "../store/dummy-data";
+import {PLANTS} from "../store/local-data";
 import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import PlantDetails from "../components/PlantList/PlantDetails";
 import Subtitle from '../components/PlantList/Subtitle';

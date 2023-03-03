@@ -17,7 +17,6 @@ const ActionSheet = (props) => {
     ]
 
     function callMe(value){
-        console.log(value.id)
         if(value.id === '#cancel'){
             props.onCancel();
         } else {

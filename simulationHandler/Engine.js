@@ -8,7 +8,7 @@ export function Run() {
     if (isGameLoopActive === false) {
         const interval = setInterval(() => {
             dispatch(countSimulationPoints())
-        }, 3000);
+        }, 5000);
 
         setTimeout(() => {
             dispatch(changeGameLoopActive({

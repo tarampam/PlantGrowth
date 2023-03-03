@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import { enableMapSet } from 'immer';
-import {SIMULATOR_PLANT} from '../dummy-data';
+import {SIMULATOR_PLANT} from '../local-data';
 import {processPlant,cureDisease, fertilizerHelper} from '../../simulationHandler/Simulation';
 import {savePlants} from "../../util/plantEndpoints";
 

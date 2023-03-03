@@ -20,7 +20,7 @@ import {
     addFertilizer,
     deletePlant
 } from '../../store/redux/plants'
-import {fertilizerList, diseaseList, wateringList, deleteList} from "../../store/dummy-data";
+import {fertilizerList, diseaseList, wateringList, deleteList} from "../../store/local-data";
 
 function FeedButtons(props){
     const [actionSheet, setActionSheet] = useState(false);

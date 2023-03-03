@@ -57,7 +57,7 @@ function PlantComponent(props){
             {plant.isFertilizer? <FertilizerPlant/>: null}
             {plant.isSprayingWater? <SprayingPlant/>: null}
             {plant.isWatering? <WateringPlant/>: null}
-            <Image source={plant.currentImage} style={{width: 180, height: 180, bottom: 85, right: 50,
+            <Image source={plant.currentImage} style={{width: 180, height: 180, bottom: 90, right: 50,
                 resizeMode: 'contain'}}/>
             {plant.typeOfDisease ? <AlertComponent scene={plant.scene} textToShow={plant.typeOfDisease} image={images.thermometerIcon} /> :
             !plant.isAlive ? <AlertComponent scene={plant.scene} textToShow={plant.name + ' nie żyje'} image={images.thermometerIcon} /> : null

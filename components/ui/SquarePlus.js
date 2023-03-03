@@ -18,7 +18,6 @@ function SquarePlus(props) {
     return (
         <TouchableOpacity style={[styles.square, {left: props.left, top: props.top}]} onPress={() => {
             if (createdPlant.get(props.id).isActive) {
-                // console.log('przekazano')
                 props.setFeeds(props.id, !props.isDisplay, createdPlant);
             } else {
                 navigation.navigate('Wybór rośliny', {idPlace: props.id})
