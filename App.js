@@ -1,16 +1,17 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer, useIsFocused} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useContext, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {useDispatch} from "react-redux";
 
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import WindowSimulatorScreen from './screens/WindowSimulatorScreen';
 import StartScreen from './screens/StartScreen';
 import SearchingPlantScreen from './screens/SearchingPlantScreen';
+import SearchingPlantDetailsScreen from './screens/SearchingPlantDetailsScreen';
 import SettingsScreen from './screens/SettingsScreen';
-import ProfileScreen from './screens/ProfileScreen';
 import WallSimulatorScreen from "./screens/WallSimulatorScreen";
 import FloorSimulatorScreen from "./screens/FloorSimulatorScreen";
 import PlantSelectionScreen from "./screens/PlantingScreens/PlantSelectionScreen";
@@ -21,11 +22,26 @@ import IconButton from './components/ui/IconButton';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {SvgFloor, SvgWall, SvgWindow} from "./components/ui/Svg";
+import {Provider} from "react-redux";
+import {Run} from "./simulationHandler/Engine"
+import {store} from "./store/redux/store";
+import {getPlants} from "./util/plantEndpoints";
+import {setPlantsData} from "./store/redux/plants";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Bottom = createBottomTabNavigator();
 const PlantingStack = createNativeStackNavigator();
+const SearchingStack = createNativeStackNavigator();
+
+function SearchingNav() {
+    return (
+        <SearchingStack.Navigator>
+            <SearchingStack.Screen name={'Searching'} component={SearchingPlantScreen} options={{headerShown: false}}/>
+            <SearchingStack.Screen name={'Searching Details'} component={SearchingPlantDetailsScreen} options={{headerTitle: 'Szczegóły rośliny'}}/>
+        </SearchingStack.Navigator>
+    )
+}
 
 function PlantingNav() {
     return (
@@ -39,14 +55,16 @@ function PlantingNav() {
 
 function BottomNav() {
     return (
-        <Bottom.Navigator>
+        <Bottom.Navigator screenOptions={{tabBarStyle: {height: 70}, tabBarLabelStyle: {fontSize: 15}}}>
             <Bottom.Screen
                 name='Parapet'
                 component={WindowSimulatorScreen}
                 options={{
                     headerShown: false,
+                    tabBarInactiveTintColor: 'black',
+                    tabBarActiveTintColor: 'green',
                     tabBarIcon: ({color,size}) =>(
-                        <SvgWindow color={color} size={size}/> )
+                        <SvgWindow color={useIsFocused()? 'green': 'black'} size={40}/> )
                 }}
             />
             <Bottom.Screen
@@ -54,16 +72,20 @@ function BottomNav() {
                 component={WallSimulatorScreen}
                 options={{
                     headerShown: false,
+                    tabBarInactiveTintColor: 'black',
+                    tabBarActiveTintColor: 'green',
                     tabBarIcon: ({color,size}) =>(
-                        <SvgWall color={color} size={size} /> )
+                        <SvgWall color={useIsFocused()? 'green': 'black'} size={40} /> )
                 }}/>
             <Bottom.Screen
                 name='Podłoga'
                 component={FloorSimulatorScreen}
                 options={{
                     headerShown: false,
+                    tabBarInactiveTintColor: 'black',
+                    tabBarActiveTintColor: 'green',
                     tabBarIcon: ({color,size}) =>(
-                        <SvgFloor color={color} size={size}/>)
+                        <SvgFloor color={useIsFocused()? 'green': 'black'} size={40}/>)
                 }}
             />
         </Bottom.Navigator>
@@ -113,11 +135,7 @@ function AuthenticatedStack() {
       />
       <Drawer.Screen
       name="Wyszukiwarka roślin"
-      component={SearchingPlantScreen}
-      />
-      <Drawer.Screen 
-      name='Profil'
-      component={ProfileScreen}
+      component={SearchingNav}
       />
       <Drawer.Screen 
       name='Ustawienia'
@@ -139,14 +157,18 @@ function Navigation() {
 }
 
 function Root(){
-  const [isTryingLogin, setIsTryingLogin] = useState(true);
+    const dispatch = useDispatch();
+    const [isTryingLogin, setIsTryingLogin] = useState(true);
   const authCtx = useContext(AuthContext);
   useEffect(() => {
     async function fetchToken(){
         const storedToken = await AsyncStorage.getItem('token');
+        const userId = await AsyncStorage.getItem('userId');
 
         if(storedToken){
-            authCtx.authenticate(storedToken);
+            authCtx.authenticate(storedToken, userId);
+            const plants = await getPlants();
+            await dispatch(setPlantsData({plants: plants}));
         }
         setIsTryingLogin(false);
     }
@@ -161,7 +183,10 @@ export default function App() {
     <>
     <StatusBar style="light" />
     <AuthContextProvider>
-      <Root/>
+        <Provider store={store}>
+            <Root/>
+            <Run/>
+        </Provider>
     </AuthContextProvider>
     </>
   );

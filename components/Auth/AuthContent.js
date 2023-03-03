@@ -3,7 +3,6 @@ import { Alert, StyleSheet, View } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import FlatButton from '../ui/FlatButton';
 import AuthForm from './AuthForm';
-import { Colors } from '../../constants/styles';
 
 function AuthContent({ isLogin, onAuthenticate }) {
     const navigation = useNavigation();
@@ -39,7 +38,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
       !passwordIsValid ||
       (!isLogin && (!emailsAreEqual || !passwordsAreEqual))
     ) {
-      Alert.alert('Invalid input', 'Please check your entered credentials.');
+      Alert.alert('Nieprawidłowe dane', 'Proszę sprawdzić wprowadzone dane.');
       setCredentialsInvalid({
         email: !emailIsValid,
         confirmEmail: !emailIsValid || !emailsAreEqual,

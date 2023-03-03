@@ -1,23 +1,23 @@
-import {ImageBackground, StyleSheet, TouchableOpacity, View} from "react-native";
+import {ImageBackground, StyleSheet, View} from "react-native";
 import {images} from "../theme/images";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faSquarePlus} from "@fortawesome/free-regular-svg-icons";
 import FeedButtons from "../components/ui/FeedButtons";
+import SquarePlus from "../components/ui/SquarePlus";
+import {useState} from "react";
 
 function FloorSimulatorScreen() {
+    const [plantId, setPlantId] = useState(undefined);
+    const [isDisplay, setIsDisplay] = useState(false);
+    const setFeeds = (plantId, isDisplay) => {
+        setPlantId(plantId);
+        setIsDisplay(isDisplay);
+    }
     return (
         <View style={styles.container}>
             <ImageBackground source={images.floorBg} resizeMode="stretch" style={styles.imageBg}>
-                <TouchableOpacity style={[styles.square, {left: 30}]}>
-                    <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={0.4}  />
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.square, {left: 160}]}>
-                    <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={0.4}  />
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.square, {left: 290}]}>
-                    <FontAwesomeIcon icon={faSquarePlus} color={'white'}   size={80} secondaryColor={'grey'} secondaryOpacity={0.4}  />
-                </TouchableOpacity>
-                <FeedButtons />
+                <SquarePlus left={30} top={200} id={7} setFeeds={setFeeds} isDisplay={isDisplay}/>
+                <SquarePlus left={160} top={200} id={8} setFeeds={setFeeds} isDisplay={isDisplay}/>
+                <SquarePlus left={290} top={200} id={9} setFeeds={setFeeds} isDisplay={isDisplay}/>
+                <FeedButtons isDisplay={isDisplay} plantId = {plantId} setFeeds={setFeeds}/>
             </ImageBackground>
         </View>
     )
@@ -33,10 +33,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         width: '100%',
         height: '100%',
-    },
-    square: {
-        position: 'absolute',
-        top: 200,
     },
 })
 
