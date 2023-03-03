@@ -1,4 +1,4 @@
-import {GROUND_ITEMS, cureDiseaseMap} from '../store/dummy-data';
+import {GROUND_ITEMS, cureDiseaseMap} from '../store/local-data';
 import {worldDirectionMap, seasonsMap, scenesMap, fertilizerDurationSeason} from '../constants/staticResource';
 import {levelTwoPoints,levelThreePoints, maxDiseaseDuration} from '../constants/staticResource';
 

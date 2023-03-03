@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {
     StyleSheet, FlatList, View, TouchableOpacity, Text
 } from 'react-native';
-import {mapOfSettings} from "../store/dummy-data";
+import {mapOfSettings} from "../store/local-data";
 import {Colors} from "../constants/styles";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";

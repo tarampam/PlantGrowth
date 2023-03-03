@@ -1,4 +1,4 @@
-import {PLANTS} from "../store/dummy-data";
+import {PLANTS} from "../store/local-data";
 import PlantList from "../components/PlantList/PlantList";
 import {useState} from "react";
 import SafeAreaView from "react-native-safe-area-view";

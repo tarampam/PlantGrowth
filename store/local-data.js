@@ -1,4 +1,4 @@
-import {images, layerImages} from "../theme/images";
+import {images, layerImages, filodendronImages, ficusImages, pileaImages, sansewieraImages} from "../theme/images";
 import Plant from "../models/plants";
 
 export const SIMULATOR_PLANT = [
@@ -25,20 +25,20 @@ export const SIMULATOR_PLANT = [
         maxHumidity: 70,
         minHumidity: 20,
         decreaseHumidityRate: 5,
-        diseaseRate: 5,
+        diseaseRate: 1,
         diseaseArray: ['plamistość liści','pędziorki'],
         fertilizerDuration: 21,
         fertilizerType: ['Nawóz mineralny do roślin domowych o ozdobnych liściach'],
     },
-    {id:'2', title:'Pilea', gridImage:images.pilea, initialImage: images.initialPlant,levelTwoImage: images.monsteraLevelTwo,
-        levelThreeImage: images.monsteraLevelThree,
-        overwateringLevelOne: images.overwateringLevelOne,
-        overwateringLevelTwo: images.overwateringMonsteraLevelTwo,
-        overwateringLevelThree: images.overwateringMonsteraLevelThree,
-        wiltingLevelOne: images.wiltingLevelOne,
-        wiltingLevelTwo: images.wiltingMonsteraLevelTwo,
-        wiltingLevelThree: images.wiltingMonsteraLevelThree,
-        deadPlantLevelOne: images.deadPlantLevelOne,
+    {id:'2', title:'Pilea', gridImage:images.pilea, initialImage: pileaImages.pileaLevelOne,levelTwoImage: pileaImages.pileaLevelTwo,
+        levelThreeImage: pileaImages.pileaLevelThree,
+        overwateringLevelOne: pileaImages.overwateringPileaLevelOne,
+        overwateringLevelTwo: pileaImages.overwateringPileaLevelTwo,
+        overwateringLevelThree: pileaImages.overwateringPileaLevelThree,
+        wiltingLevelOne: pileaImages.wiltingPileaLevelOne,
+        wiltingLevelTwo: pileaImages.wiltingPileaLevelTwo,
+        wiltingLevelThree: pileaImages.wiltingPileaLevelThree,
+        deadPlantLevelOne: pileaImages.deadPileaLevelOne,
         sickPlantImage: images.sickPlant,
         correctGround: [
             {numberOfLayer: 1, idGround: 6},
@@ -58,15 +58,15 @@ export const SIMULATOR_PLANT = [
         fertilizerDuration: 21,
         fertilizerType: ['Nawóz mineralny do roślin domowych o ozdobnych liściach'],
     },
-    {id:'3', title:'Filodendron', gridImage:images.filodendron, initialImage: images.initialPlant,levelTwoImage: images.monsteraLevelTwo,
-        levelThreeImage: images.monsteraLevelThree,
-        overwateringLevelOne: images.overwateringLevelOne,
-        overwateringLevelTwo: images.overwateringMonsteraLevelTwo,
-        overwateringLevelThree: images.overwateringMonsteraLevelThree,
-        wiltingLevelOne: images.wiltingLevelOne,
-        wiltingLevelTwo: images.wiltingMonsteraLevelTwo,
-        wiltingLevelThree: images.wiltingMonsteraLevelThree,
-        deadPlantLevelOne: images.deadPlantLevelOne,
+    {id:'3', title:'Filodendron', gridImage:images.filodendron, initialImage: filodendronImages.filodendronLevelOne,levelTwoImage: filodendronImages.filodendronLevelTwo,
+        levelThreeImage: filodendronImages.filodendronLevelThree,
+        overwateringLevelOne: filodendronImages.overwateringFilodendronLevelOne,
+        overwateringLevelTwo: filodendronImages.overwateringFilodendronLevelTwo,
+        overwateringLevelThree: filodendronImages.overwateringFilodendronLevelThree,
+        wiltingLevelOne: filodendronImages.wiltingFilodendronLevelOne,
+        wiltingLevelTwo: filodendronImages.wiltingFilodendronLevelTwo,
+        wiltingLevelThree: filodendronImages.wiltingFilodendronLevelThree,
+        deadPlantLevelOne: filodendronImages.deadFilodendronLevelOne,
         sickPlantImage: images.sickPlant,
         correctGround: [
             {numberOfLayer: 1, idGround: 3},
@@ -81,20 +81,20 @@ export const SIMULATOR_PLANT = [
         maxHumidity: 50,
         minHumidity: 20,
         decreaseHumidityRate: 3,
-        diseaseRate: 3,
+        diseaseRate: 1,
         diseaseArray: ['plamistość liści','wełnowce'],
         fertilizerDuration: 10,
         fertilizerType: ['Nawóz mineralny do roślin domowych o ozdobnych liściach'],
     },
-    {id:'4', title:'Fikus benjamina', gridImage:images.fikus, initialImage: images.initialPlant,levelTwoImage: images.monsteraLevelTwo,
-        levelThreeImage: images.monsteraLevelThree,
-        overwateringLevelOne: images.overwateringLevelOne,
-        overwateringLevelTwo: images.overwateringMonsteraLevelTwo,
-        overwateringLevelThree: images.overwateringMonsteraLevelThree,
-        wiltingLevelOne: images.wiltingLevelOne,
-        wiltingLevelTwo: images.wiltingMonsteraLevelTwo,
-        wiltingLevelThree: images.wiltingMonsteraLevelThree,
-        deadPlantLevelOne: images.deadPlantLevelOne,
+    {id:'4', title:'Fikus benjamina', gridImage:images.fikus, initialImage: ficusImages.ficusLevelOne,levelTwoImage: ficusImages.ficusLevelTwo,
+        levelThreeImage: ficusImages.ficusLevelThree,
+        overwateringLevelOne: ficusImages.overwateringFicusLevelOne,
+        overwateringLevelTwo: ficusImages.overwateringFicusLevelTwo,
+        overwateringLevelThree: ficusImages.overwateringFicusLevelThree,
+        wiltingLevelOne: ficusImages.wiltingFicusLevelOne,
+        wiltingLevelTwo: ficusImages.wiltingFicusLevelTwo,
+        wiltingLevelThree: ficusImages.wiltingFicusLevelThree,
+        deadPlantLevelOne: ficusImages.deadFicusLevelOne,
         sickPlantImage: images.sickPlant,
         correctGround: [
             {numberOfLayer: 1, idGround: 2},
@@ -109,20 +109,20 @@ export const SIMULATOR_PLANT = [
         maxHumidity: 50,
         minHumidity: 10,
         decreaseHumidityRate:2,
-        diseaseRate: 5,
+        diseaseRate: 1,
         diseaseArray: ['plamistość liści','korkowatość liści','pędziorki','wciornastki'],
         fertilizerDuration: 14,
         fertilizerType: ['Nawóz mineralny do roślin domowych o ozdobnych liściach'],
     },
-    {id:'5', title:'Sansewieria', gridImage:images.sansewiera, initialImage: images.initialPlant,levelTwoImage: images.monsteraLevelTwo,
-        levelThreeImage: images.monsteraLevelThree,
-        overwateringLevelOne: images.overwateringLevelOne,
-        overwateringLevelTwo: images.overwateringMonsteraLevelTwo,
-        overwateringLevelThree: images.overwateringMonsteraLevelThree,
-        wiltingLevelOne: images.wiltingLevelOne,
-        wiltingLevelTwo: images.wiltingMonsteraLevelTwo,
-        wiltingLevelThree: images.wiltingMonsteraLevelThree,
-        deadPlantLevelOne: images.deadPlantLevelOne,
+    {id:'5', title:'Sansewieria', gridImage:images.sansewiera, initialImage: sansewieraImages.sansewieraLevelOne,levelTwoImage: sansewieraImages.sansewieraLevelTwo,
+        levelThreeImage: sansewieraImages.sansewieraLevelThree,
+        overwateringLevelOne: sansewieraImages.overwateringSansewieraLevelOne,
+        overwateringLevelTwo: sansewieraImages.overwateringSansewieraLevelTwo,
+        overwateringLevelThree: sansewieraImages.overwateringSansewieraLevelThree,
+        wiltingLevelOne: sansewieraImages.wiltingSansewieraLevelOne,
+        wiltingLevelTwo: sansewieraImages.wiltingSansewieraLevelTwo,
+        wiltingLevelThree: sansewieraImages.wiltingSansewieraLevelThree,
+        deadPlantLevelOne: sansewieraImages.deadSansewieraLevelOne,
         sickPlantImage: images.sickPlant,
         correctGround: [
             {numberOfLayer: 1, idGround: 6},
@@ -137,7 +137,7 @@ export const SIMULATOR_PLANT = [
         maxHumidity: 70,
         minHumidity: 5,
         decreaseHumidityRate: 1,
-        diseaseRate: 10,
+        diseaseRate: 1,
         diseaseArray: ['pędziorki','wciornastki','wełnowce'],
         fertilizerDuration: 30,
         fertilizerType: ['Nawóz mineralny do roślin domowych o ozdobnych liściach', 'Nawóz do kaktusów i sukulentów'],
@@ -305,6 +305,94 @@ export const PLANTS = [
             'Doskonale wygląda w nowoczesnych wnętrzach i nie wymaga zbytniej pielęgnacji. ' +
             'Roślina bardzo dekoracyjna, dobrze wygląda nawet tam gdzie inne gatunki nie chcą rosnąć: w biurach, halach fabrycznych, na korytarzach.',
         ]
+    ),
+    new Plant(
+        'p3',
+        'Pilea peperomiowata/ Pieniążek',
+        'żyzna, przepuszczalna',
+        'półcień',
+        'https://zielonyogrodek.pl/i/images/1/5/8/d2FjPTc3MHgx_src_86158-Pilea-peperomiowata-fot.-Floradania.dk.jpg',
+        'gleba umiarkowanie wilgotna',
+        [
+            '1. Drobny żwir 50%.',
+            '2. Wysokiej jakości podłoże z torfu wysokiego 20%.',
+            '3. Mieszanka perlitu oraz keramzytu (w stosunku 1:1) 30%.',
+        ],
+        [
+            'Pilea peperomiowata preferuje półcieniste stanowisko z rozproszonym światłem oraz żyzne, przepuszczalne,' +
+            ' lekko wilgotne podłoże. Bardzo lubi też wilgotne powietrze, dlatego jej doniczkę warto ustawić na podstawce' +
+            ' z wilgotnymi kulkami keramzytu lub umieścić w pobliżu nawilżacza powietrza. ',
+            'Roślinie należy też przez cały rok zapewnić dość wysoką temperaturę (ok. 20-24°C),' +
+            ' która może być nieco niższa jedynie zimą (ok. 15-18°).',
+            'Pilea rzadko bywa atakowana przez choroby lub szkodniki, ale jest bardzo wrażliwa na błędy uprawowe.',
+            'Nie lubi przycinania, gdyż wtedy jej pęd główny może zagniwać.',
+            'Źle znosi też niskie temperatury (poniżej 10°C) i zimne przeciągi, na które reaguje zrzucaniem liści. ' +
+            'Toleruje przejściową suszę, ale jest wrażliwa na zalanie (w mokrej ziemi korzenie łatwo gniją). ',
+            'Powinna być umiarkowanie nawożona szczególnie w okresie wzrostu.',
+        ],
+        [
+            'Pilea peperomiowata to idealna roślina pokojowa. Pięknie prezentuje się w ładnej doniczce jako soliter, ' +
+            'umieszczony na komodzie lub okiennym parapecie.',
+        ],
+    ),
+    new Plant(
+        'p4',
+        'Fikus benjamina',
+        'żyzna, próchniczna, przepuszczalna',
+        'słońce',
+        'https://zielonyogrodek.pl/i/images/6/7/7/d2FjPTc3MHgx_src_79677-Figowiec-benjamina-fikus-paczcy-fot.-Floradania.dk.jpg',
+        'gleba umiarkowanie wilgotna',
+        [
+            '1. Wysokiej jakości podłoże z torfu wysokiego 50%',
+            '2. Czips kokosowy 20%.',
+            '3. Keramzyt 20%.',
+            '4. Piasek bądź drobny żwir 10%.'
+        ],
+        [
+            'Jest łatwy w pielęgnacji choć równocześnie znany jest z tego, że łatwo zrzuca liście. ',
+            'Fikus benjamina lubi dużą ilość światła, ale nie należy ustawiać go przy oknie wychodzącym ' +
+            'na południe, gdyż nie znosi silnego i bezpośredniego nasłonecznienia. Fikus przyzwyczaja się do ' +
+            'miejsca, w którym stoi i do kierunku padania światła.',
+            'Fikus benjamina dobrze rośnie w temperaturze pokojowej.',
+            'Roślina ta potrzebuje żyznego podłoża – przepuszczalnego, zawierającego dużo próchnicy i substancji pokarmowych.',
+            'Woda do podlewania fikusa benjamina powinna być miękka, najlepiej przegotowana. Podlewamy roślinę wtedy, gdy ' +
+            'powierzchnia ziemi lekko przeschnie. Fikusy lubią być zraszane, co przy okazji przypomina nam o tym, aby wycierać ' +
+            'kurz z ich liści.',
+            'Fikus lubi być regularnie nawożony (raz na 2 tygodnie nawozem do roślin o zielonych liściach).',
+        ],
+        [
+            'Figowce doskonale nadają się do tworzenia małych kompozycji z innymi roślinami doniczkowymi czy formowania drzewek bonsai. ' +
+            'Nowe odmiany różnią się wielkością, kształtem oraz kolorem liści – zwykle są ciemno zielone, ale mogą być również żółto- lub biało-zielone.',
+        ],
+    ),
+    new Plant(
+        'p5',
+        'Filodendron',
+        'torfowa, żyzna, przepuszczalna',
+        'półcień',
+        'https://zielonyogrodek.pl/i/images/3/9/0/d2FjPTc3MHgx_src_85390-Filodendron-pncy-fot.-Floradania.dk.jpg',
+        'gleba umiarkowanie wilgotna',
+        [
+            '1. 60% czipsu kokosowego',
+            '2. 20% podłoża uniwersalnego z torfu wysokiego',
+            '3. 10% keramzytu',
+            '4. 10% perlitu',
+        ],
+        [
+            'Filodendrony najlepiej rosną w rozproszonym świetle (bardzo źle znoszą bezpośrednie słońce!) i dużej wilgotności powietrza.',
+            'Rośliny przez okres wiosny i lata potrzebują sporo wody – musimy je podlewać umiarkowanie ale często. Lubi zraszanie miękką wodą (np. deszczówką).',
+            'Pnącza te wymagają nawożenia. W okresie od kwietnia do sierpnia powinniśmy stosować naprzemiennie nawozy mineralne i organiczne. Maja szczególne zapotrzebowanie na magnez.',
+            'Filodendrony nie przechodzą spoczynku – w okresie zimy możemy je przestawić bliżej światła oraz zmniejszyć częstotliwość podlewania.',
+            'Są czasem atakowane przez przędziorki i patogeny (bakterie i grzyby) powodujące plamistość liści.',
+        ],
+        [
+            'Egzotyczne pnącza doskonale nadają się do nowoczesnych wnętrz. ' +
+            'Są świetne do pokoi dziennych i sypialni. Uprawiane w widnych łazienkach powinny stać na miseczce z wodą, aby parująca woda zapewniała ' +
+            'im odpowiednie warunki.\n' +
+            '\n' +
+            'Na terenach Amazonii filodendrony są bardzo rozpowszechnione i używane w wielu dziedzinach – od medycyny ludowej na problemy skórne po ' +
+            'wytwarzanie plecionych koszy i lin (z korzeni powietrznych).',
+        ],
     ),
 ];
 

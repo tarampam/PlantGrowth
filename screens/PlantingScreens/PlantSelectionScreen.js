@@ -2,7 +2,7 @@ import Button from '../../components/ui/Button';
 import {useState} from "react";
 import {View, StyleSheet, FlatList, Pressable, Text, Platform, Image, Alert} from "react-native";
 import {Colors} from '../../constants/styles'
-import {SIMULATOR_PLANT} from '../../store/dummy-data'
+import {SIMULATOR_PLANT} from '../../store/local-data'
 
 
 function CategoryGridTile({title, image, gridId,activePlant, onPress}) {

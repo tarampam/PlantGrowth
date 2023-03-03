@@ -5,7 +5,7 @@ import {Image, StyleSheet, Pressable, SafeAreaView, Alert} from "react-native";
 import {images, layerImages} from "../../theme/images";
 import React, {useState} from "react";
 import {countGround, countLighting, checkLightingPlant} from '../../simulationHandler/Simulation';
-import {GROUND_ITEMS} from '../../store/dummy-data';
+import {GROUND_ITEMS} from '../../store/local-data';
 
 
 

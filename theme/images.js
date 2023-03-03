@@ -4,7 +4,6 @@ import windowsill from '../assets/images/windowsill.png';
 import wallBg from '../assets/images/white-blank-concrete-wall-with-a-wooden-floor.jpg';
 import shelf from '../assets/images/shelf.png';
 import floorBg from '../assets/images/white-blank-concrete-wall-with-a-wooden-floor2.jpg';
-import fertilizer from '../assets/images/seeds-fertilizer-svgrepo-com (3).svg';
 import bigPot from '../assets/images/doniczka.png';
 import wateringCan from '../assets/images/watering-can.gif';
 import fratelizer from '../assets/images/fertilizer.gif';
@@ -21,8 +20,59 @@ import monsteraLevelThree from '../assets/images/etap-końcowy.gif';
 import overwateringMonsteraLevelThree from '../assets/images/etap-końcowy_przelany.gif';
 import wiltingMonsteraLevelTwo from '../assets/images/etap-środkowy_ususzony.gif';
 import wiltingMonsteraLevelThree from '../assets/images/etap-końcowy_ususzony.gif';
-import deadPlant from '../assets/images/deadPlant.gif';
 import sickPlant from '../assets/images/sickPlant.gif';
+
+import filodendronLevelOne from '../assets/images/filodendron/filodendron-mały.gif';
+import overwateringFilodendronLevelOne from '../assets/images/filodendron/filodendron-mały_przelany.gif';
+import wiltingFilodendronLevelOne from '../assets/images/filodendron/filodendron-mały_uschniety.gif';
+import deadFilodendronLevelOne from '../assets/images/filodendron/filodendron-mały_umarty.gif';
+import filodendronLevelTwo from '../assets/images/filodendron/filodendron-średni.gif';
+import overwateringFilodendronLevelTwo from '../assets/images/filodendron/filodendron-średni_przelany.gif';
+import wiltingFilodendronLevelTwo from '../assets/images/filodendron/filodendron-średni_uschniety.gif';
+import deadFilodendronLevelTwo from '../assets/images/filodendron/filodendron-średni_umarty.gif';
+import filodendronLevelThree from '../assets/images/filodendron/filodendron-duzy.gif';
+import overwateringFilodendronLevelThree from '../assets/images/filodendron/filodendron-duzy_przelany.gif';
+import wiltingFilodendronLevelThree from '../assets/images/filodendron/filodendron-duzy_uschniety.gif';
+import deadFilodendronLevelThree from '../assets/images/filodendron/filodendron-duzy_umarty.gif';
+
+import ficusLevelOne from '../assets/images/ficus/ficus-mały.gif';
+import overwateringFicusLevelOne from '../assets/images/ficus/ficus-mały_przelany.gif';
+import wiltingFicusLevelOne from '../assets/images/ficus/ficus-mały_uschniety.gif';
+import deadFicusLevelOne from '../assets/images/ficus/ficus-mały_umarty.gif';
+import ficusLevelTwo from '../assets/images/ficus/ficus-średni.gif';
+import overwateringFicusLevelTwo from '../assets/images/ficus/ficus-średni_przelany.gif';
+import wiltingFicusLevelTwo from '../assets/images/ficus/ficus-średni_uschniety.gif';
+import deadFicusLevelTwo from '../assets/images/ficus/ficus-średni_umarty.gif';
+import ficusLevelThree from '../assets/images/ficus/ficus-duzy.gif';
+import overwateringFicusLevelThree from '../assets/images/ficus/ficus-duzy_przelany.gif';
+import wiltingFicusLevelThree from '../assets/images/ficus/ficus-duzy_uschniety.gif';
+import deadFicusLevelThree from '../assets/images/ficus/ficus-duzy_umarty.gif';
+
+import pileaLevelOne from '../assets/images/pilea/etap-początkowy.gif';
+import overwateringPileaLevelOne from '../assets/images/pilea/etap-początkowy_przelany.gif';
+import wiltingPileaLevelOne from '../assets/images/pilea/etap-początkowy_ususzony.gif';
+import deadPileaLevelOne from '../assets/images/pilea/etap-początkowy_umarty.gif';
+import pileaLevelTwo from '../assets/images/pilea/etap-środkowy.gif';
+import overwateringPileaLevelTwo from '../assets/images/pilea/etap-środkowy_przelany.gif';
+import wiltingPileaLevelTwo from '../assets/images/pilea/etap-środkowy_ususzony.gif';
+import deadPileaLevelTwo from '../assets/images/pilea/etap-środkowy_umarty.gif';
+import pileaLevelThree from '../assets/images/pilea/etap-końcowy.gif';
+import overwateringPileaLevelThree from '../assets/images/pilea/etap-końcowy_przelany.gif';
+import wiltingPileaLevelThree from '../assets/images/pilea/etap-końcowy_ususzony.gif';
+import deadPileaLevelThree from '../assets/images/pilea/etap-końcowy_umarty.gif';
+
+import sansewieraLevelOne from '../assets/images/sansewiera/sanseviera-mała.gif';
+import overwateringSansewieraLevelOne from '../assets/images/sansewiera/sanseviera-mała_przelana.gif';
+import wiltingSansewieraLevelOne from '../assets/images/sansewiera/sanseviera-mała_uschnięta.gif';
+import deadSansewieraLevelOne from '../assets/images/sansewiera/sanseviera-mała_umarta.gif';
+import sansewieraLevelTwo from '../assets/images/sansewiera/sanseviera-średnia.gif';
+import overwateringSansewieraLevelTwo from '../assets/images/sansewiera/sanseviera-średnia_przelana.gif';
+import wiltingSansewieraLevelTwo from '../assets/images/sansewiera/sanseviera-średnia_uschnięta.gif';
+import deadSansewieraLevelTwo from '../assets/images/sansewiera/sanseviera-średnia_umarta.gif';
+import sansewieraLevelThree from '../assets/images/sansewiera/sanseviera-wyrośnieta.gif';
+import overwateringSansewieraLevelThree from '../assets/images/sansewiera/sanseviera-wyrośnieta_przelana.gif';
+import wiltingSansewieraLevelThree from '../assets/images/sansewiera/sanseviera-wyrośnieta_uschnięta.gif';
+import deadSansewieraLevelThree from '../assets/images/sansewiera/sanseviera-wyrośnieta_umarta.gif';
 
 import monstera from '../assets/images/monstera.jpg';
 import pilea from '../assets/images/pilea.jpg';
@@ -76,7 +126,6 @@ export const images = {
   wallBg: wallBg,
   floorBg: floorBg,
   shelf: shelf,
-  fertilizer: fertilizer,
   bigPot: bigPot,
   wateringCan: wateringCan,
   fratelizer: fratelizer,
@@ -92,7 +141,6 @@ export const images = {
   monsteraLevelThree: monsteraLevelThree,
   overwateringMonsteraLevelThree: overwateringMonsteraLevelThree,
   wiltingMonsteraLevelThree: wiltingMonsteraLevelThree,
-  deadPlant: deadPlant,
   sickPlant: sickPlant,
   monstera: monstera,
   pilea: pilea,
@@ -101,6 +149,66 @@ export const images = {
   sansewiera: sansewiera,
   thermometerIcon: thermometerIcon,
   noWater: noWater,
+}
+
+export const filodendronImages = {
+  filodendronLevelOne: filodendronLevelOne,
+  overwateringFilodendronLevelOne: overwateringFilodendronLevelOne,
+  wiltingFilodendronLevelOne: wiltingFilodendronLevelOne,
+  deadFilodendronLevelOne: deadFilodendronLevelOne,
+  filodendronLevelTwo: filodendronLevelTwo,
+  overwateringFilodendronLevelTwo: overwateringFilodendronLevelTwo,
+  wiltingFilodendronLevelTwo: wiltingFilodendronLevelTwo,
+  deadFilodendronLevelTwo: deadFilodendronLevelTwo,
+  filodendronLevelThree: filodendronLevelThree,
+  overwateringFilodendronLevelThree: overwateringFilodendronLevelThree,
+  wiltingFilodendronLevelThree: wiltingFilodendronLevelThree,
+  deadFilodendronLevelThree: deadFilodendronLevelThree,
+}
+
+export const ficusImages = {
+  ficusLevelOne: ficusLevelOne,
+  overwateringFicusLevelOne: overwateringFicusLevelOne,
+  wiltingFicusLevelOne: wiltingFicusLevelOne,
+  deadFicusLevelOne: deadFicusLevelOne,
+  ficusLevelTwo: ficusLevelTwo,
+  overwateringFicusLevelTwo: overwateringFicusLevelTwo,
+  wiltingFicusLevelTwo: wiltingFicusLevelTwo,
+  deadFicusLevelTwo: deadFicusLevelTwo,
+  ficusLevelThree: ficusLevelThree,
+  overwateringFicusLevelThree: overwateringFicusLevelThree,
+  wiltingFicusLevelThree: wiltingFicusLevelThree,
+  deadFicusLevelThree: deadFicusLevelThree,
+}
+
+export const pileaImages = {
+  pileaLevelOne: pileaLevelOne,
+  overwateringPileaLevelOne: overwateringPileaLevelOne,
+  wiltingPileaLevelOne: wiltingPileaLevelOne,
+  deadPileaLevelOne: deadPileaLevelOne,
+  pileaLevelTwo: pileaLevelTwo,
+  overwateringPileaLevelTwo: overwateringPileaLevelTwo,
+  wiltingPileaLevelTwo: wiltingPileaLevelTwo,
+  deadPileaLevelTwo: deadPileaLevelTwo,
+  pileaLevelThree: pileaLevelThree,
+  overwateringPileaLevelThree: overwateringPileaLevelThree,
+  wiltingPileaLevelThree: wiltingPileaLevelThree,
+  deadPileaLevelThree: deadPileaLevelThree,
+}
+
+export const sansewieraImages = {
+  sansewieraLevelOne: sansewieraLevelOne,
+  overwateringSansewieraLevelOne: overwateringSansewieraLevelOne,
+  wiltingSansewieraLevelOne: wiltingSansewieraLevelOne,
+  deadSansewieraLevelOne: deadSansewieraLevelOne,
+  sansewieraLevelTwo: sansewieraLevelTwo,
+  overwateringSansewieraLevelTwo: overwateringSansewieraLevelTwo,
+  wiltingSansewieraLevelTwo: wiltingSansewieraLevelTwo,
+  deadSansewieraLevelTwo: deadSansewieraLevelTwo,
+  sansewieraLevelThree: sansewieraLevelThree,
+  overwateringSansewieraLevelThree: overwateringSansewieraLevelThree,
+  wiltingSansewieraLevelThree: wiltingSansewieraLevelThree,
+  deadSansewieraLevelThree: deadSansewieraLevelThree,
 }
 
 export const layerImages = {
